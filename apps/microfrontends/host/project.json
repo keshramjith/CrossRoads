@@ -1,0 +1,73 @@
+{
+  "root": "apps/microfrontends/host",
+  "sourceRoot": "apps/microfrontends/host/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/microfrontends/host",
+        "index": "apps/microfrontends/host/src/index.html",
+        "baseHref": "/",
+        "main": "apps/microfrontends/host/src/main.tsx",
+        "polyfills": "apps/microfrontends/host/src/polyfills.ts",
+        "tsConfig": "apps/microfrontends/host/tsconfig.app.json",
+        "assets": [
+          "apps/microfrontends/host/src/favicon.ico",
+          "apps/microfrontends/host/src/assets"
+        ],
+        "styles": ["apps/microfrontends/host/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/microfrontends/host/src/environments/environment.ts",
+              "with": "apps/microfrontends/host/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "microfrontends-host:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "microfrontends-host:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/microfrontends/host/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/microfrontends/host"],
+      "options": {
+        "jestConfig": "apps/microfrontends/host/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

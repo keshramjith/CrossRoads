@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "microfrontends-host": "apps/microfrontends/host",
+    "microfrontends-host-e2e": "apps/microfrontends/host-e2e"
+  }
+}
